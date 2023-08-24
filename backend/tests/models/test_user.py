@@ -7,15 +7,15 @@ from app.models.user import User
 
 
 async def test_user_model(db: AsyncSession):
-    user = User(id=uuid4(), email="user33@yahoo.com", hashed_password="1234")
+    user = User(id=uuid4(), email="user40@yahoo.com", hashed_password="1234")
     db.add(user)
     await db.commit()
     assert user.id
 
 # test case to check for valid users
 async def test_valid_user(db: AsyncSession):
-    user = User(id=uuid4(), email="user15@gmail.com", hashed_password="1234")
-    user1 = User(id=uuid4(), email="user15@example.com", hashed_password="5678")
+    user = User(id=uuid4(), email="user45@gmail.com", hashed_password="1234")
+    user1 = User(id=uuid4(), email="user45@example.com", hashed_password="5678")
     db.add(user)
     await db.commit()
     db.add(user1)
