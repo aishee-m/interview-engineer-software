@@ -21,16 +21,17 @@ async def test_valid_user(db: AsyncSession):
     db.add(user1)
     await db.commit()
     
-    stmt = select(User).order_by(User.id)
-    users = await db.execute(stmt)
+    # fetch all the users 
+    selected_users = select(User).order_by(User.id)
+    users = await db.execute(selected_users)
     users = users.scalars().all()
-    #similar to the API endpoint
+    #similar to the API endpoint to check for validity
     def is_valid_email(email):
         email_domain = email.split('@')[1]
         try:
             response = requests.get(f"http://{email_domain}")
             if response.status_code == 200:
-                return True #returns true which is valid email
+                return True #returns true for valid email
         except (IndexError, requests.RequestException):
             return False
 
